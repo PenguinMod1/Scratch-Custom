@@ -1,0 +1,115 @@
+class SolveExtension {
+  constructor(runtime) {
+    this.runtime = runtime;
+  }
+
+  getInfo() {
+    return {
+      id: 'solveExtension',
+      name: 'Solve Extension',
+      blocks: [
+        {
+          opcode: 'solveMath',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'Solve [question]',
+          arguments: {
+            question: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: '2+2',
+            },
+          },
+        },
+        {
+          opcode: 'add',
+          blockType: Scratch.BlockType.REPORTER,
+          text: '[num1] + [num2]',
+          arguments: {
+            num1: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 0,
+            },
+            num2: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 0,
+            },
+          },
+        },
+        {
+          opcode: 'subtract',
+          blockType: Scratch.BlockType.REPORTER,
+          text: '[num1] - [num2]',
+          arguments: {
+            num1: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 0,
+            },
+            num2: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 0,
+            },
+          },
+        },
+        {
+          opcode: 'multiply',
+          blockType: Scratch.BlockType.REPORTER,
+          text: '[num1] * [num2]',
+          arguments: {
+            num1: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 0,
+            },
+            num2: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 0,
+            },
+          },
+        },
+        {
+          opcode: 'divide',
+          blockType: Scratch.BlockType.REPORTER,
+          text: '[num1] / [num2]',
+          arguments: {
+            num1: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 0,
+            },
+            num2: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 1,
+            },
+          },
+        },
+      ],
+    };
+  }
+
+  solveMath(args) {
+    const result = eval(args.question);
+    return result.toString();
+  }
+
+  add(args) {
+    const result = args.num1 + args.num2;
+    return result.toString();
+  }
+
+  subtract(args) {
+    const result = args.num1 - args.num2;
+    return result.toString();
+  }
+
+  multiply(args) {
+    const result = args.num1 * args.num2;
+    return result.toString();
+  }
+
+  divide(args) {
+    if (args.num2 === 0) {
+      return 'Error: Division by zero';
+    }
+    const result = args.num1 / args.num2;
+    return result.toString();
+  }
+}
+
+Scratch.extensions.register(new SolveExtension());
